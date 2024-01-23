@@ -58,14 +58,14 @@ class Select{
                 }
         }
                
-        }
-                        
         catch(Exception $e){
                        
         header("Location: Page.php");   
           exit();      
         }
                 
+        }
+                        
 
                 
                 }
@@ -79,7 +79,6 @@ class Select{
         
 
 
-}
 
 
          

@@ -3,8 +3,8 @@ session_start();
 ?>
 <!DOCTYPE HTML>
 
-	<html>
-		<head>
+	<html >
+		<head >
 			<title>Página inicial</title>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -34,7 +34,6 @@ session_start();
       list-style: none;
    }
 	body {
-    border: 10px solid black; /* 10 pixels de largura, cor preta (substitua pela cor desejada) */
     margin: 0; /* Para garantir que a borda se estenda até a borda da janela do navegador */
     padding: 0; /* Para garantir que não haja preenchimento interno dentro da borda */
 }
@@ -112,24 +111,7 @@ session_start();
 	<header id="header">
 		
 			<!--<a href="index.html" class="logo"><strong>Portfólio</strong> de Anderson Ferreira</a>-->
-			    <nav class="navbar navbar-light ">
-                    <div class="container" >
-                        <div class="dropdown">
-                            <i class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Filtrar
-                            </i>
-                        
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="#">Todas</a></li>
-                              <li><a class="dropdown-item" href="#">Abaixo de R$100,00</a></li>
-                              <li><a class="dropdown-item" href="#">Acima de R$100,00</a></li>
-                            </ul>
-                        
-                          </div> 
-                          
-                    </div>
-                  </nav>
-                  
+			          
 		</header>
 
 	<!-- Banner -->
@@ -141,44 +123,18 @@ session_start();
 				</header>
 				
             </div>
-		
+	
         </section>
 
 	<!-- Section -->
 	<main>
-		<div class="container">
+		<div class="container float-sm-start">
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-		<?php
 		
-
 		
-		foreach($_SESSION['itens'] as $produto){
-		echo "	
-		  <div class='col mb-5'>
-                        <div class='card h-100'>
-                            <!-- Product image-->
-                            <img class='card-img-top border border-dark' src='". $produto['imagem'] . "' alt='...' />
-                            <!-- Product details-->
-                            <div class='card-body p-4'>
-                                <div class='text-center'>
-                                    <!-- Product name-->
-                                    <h5 class='fw-bolder border border-dark'>". $produto['modelo'] . "</h5>
-                                    <!-- Product price-->
-
-                                    <h5 class'font-weight-bold'>Quantidade no estoque:<br><br> ". $produto['quantidade'] . " itens</h5>
-                                    <h5 class'font-weight-bold'>R$ ". $produto['valor'] . " reais </h5>
-                                </div>
-                            </div>
-                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                <div class='text-center'><a class='btn btn-secondary mt-auto' href='#'>Ver mais</a></div>
-                            </div>
-                        </div>
-                    </div>";
-        
-		  }      	
-		?>
+		
 		</div>
         </div>
     </section>
