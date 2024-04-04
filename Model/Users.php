@@ -6,7 +6,7 @@ require_once("../Controller/Insert.php");
 
 class Users {
     public static function User($dados, $arquivo,$conn){
-    $nome = $dados['nome'];
+    $nome = $dados['usuario'];
     $email = $dados['email'];
     $senha = hash('sha256',$dados['senha']);
     $file = $arquivo;   
@@ -16,10 +16,9 @@ $cidade = $dados['cidade'];
 $estado = $dados['estado'];   
 $cep = $dados['cep'];   
 
-$arq = array("jpeg","png","jpg");
         
 
-$dir = "../fotos/" . $file['name'];
+$dir = "../fotos/users" . $file['name'];
     if (move_uploaded_file($file['tmp_name'], $dir)){
         echo" 
            <script> 
@@ -40,7 +39,7 @@ $dir = "../fotos/" . $file['name'];
            
            $insert->save($conn);
            
-       //header("Location: ");
+       header("Location:../index.php");
        exit(); 
     
     }else{

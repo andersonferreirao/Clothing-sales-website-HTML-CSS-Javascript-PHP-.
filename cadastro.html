@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+    />
+    
+    <style>
+        body {
+  border: 10px solid blueviolet ;
+  border-bottom: none;
+} 
+
+        #main {
+            color: white;
+        }
+        #form {
+            color: black;
+        }
+       
+/* Aparência que terá o seletor de arquivo */
+#foto {
+  background-color: #3498db;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  padding: 6px 20px
+}
+        
+    </style>
+</head>
+<body class="d-flex align-items-center py-4 bg-dark h-100">
+<main id="main" class=" m-auto container h-100">
+    <h1 class="" ><span style="color:blueviolet" class="">Fw </span>variedades</h1>
+    <form  class="form-container needs-validation bg bg-dark.bg-gradient mb-5" id="form" action="./Model/users.php" method="POST" novalidate enctype="multipart/form-data">
+        <center><h1 class="h3 mb-3 fw-normal text-light fs-1"> Cadastro de Usuários</h1></center>
+       
+        <div class="form-row">
+            
+            
+                <div class="mb-0">
+                    <label for="foto_input" class="form-label" id="foto">Foto</label>
+                        <input 
+                        class="float-start form-control w-50 " 
+                        id="foto_input"
+                        name="foto" 
+                        type="file"
+                        placeholder="Foto"
+                        onchange="VerificaInput('foto_input')"
+                        hidden>
+                    
+                <div class="invalid-feedback">
+                    
+                </div>
+
+                    </div>
+
+
+                  <div>    
+            <div class="form-floating mb-3 w-75">
+                <input
+                onchange="VerificaInput('usuario')"  
+                type="text" 
+                class="form-control is-invalid" 
+                id="usuario" 
+                name="usuario" 
+                placeholder="Nome de usuário" 
+                required>
+                <label for="floatingInput">Nome de usuário</label>
+                
+              </div>
+              <span>
+                
+                    
+              </span>
+            <div class="form-floating mb-3 w-75 is-invalid">
+                <input 
+                onchange="VerificaInput('email')"
+                type="email" 
+                class="form-control is-invalid w-75" 
+                id="email" 
+                name="email" 
+                placeholder="Email"
+                required>
+                <label for="floatingInput">Email </label>
+            </div>
+        </div>
+        
+        <div class="form-floating mb-3">
+            <input 
+            onchange="VerificaInput('senha')"
+            type="password" 
+            class="form-control is-invalid w-75" 
+            id="senha" 
+            name="senha" 
+            placeholder="Senha"
+            required>
+            <label for="floatingInput">Senha</label>
+        </div>
+        <div class="form-floating mb-3 w-50">
+            <input
+            onchange="VerificaInput('telefone')" 
+            type="text" 
+            class="form-control is-invalid" 
+            id="telefone" 
+            name="telefone" 
+            placeholder="Telefone"
+            
+            required>
+            <label for="floatingInput">Telefone</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input 
+                oninput="VerificaInput('cidade')"
+                type="text" 
+                class="form-control w-75" 
+                id="cidade"  
+                name="cidade" 
+                placeholder="cidade"
+                required>
+            <label for="floatingInput">Cidade</label>
+        </div>
+        <div class="form-floating mb-3 ">
+            <input 
+                oninput="VerificaInput('endereco')"
+                type="text" 
+                class="form-control " 
+                id="endereco"  
+                name="endereco" 
+                placeholder="Endereço"
+                required>
+            <label for="floatingInput">Endereço</label>
+        </div>
+        <center>
+            <div class="form-floating mt-3 w-50">
+                <select
+                    oninput="VerificaInput('estado')"
+                    class="form-select "
+                    id="estado"
+                    name="estado"
+                    aria-label="Floating label select example">
+                    <option selected disabled value="">Estado</option>
+                    <option>MG</option>
+                    <option>SP</option>
+                    <option>BA</option>
+                    <option>PA</option>
+                    <option>MA</option>
+                    <option>DF</option>
+                    <option>AM</option>
+                    <option>RS</option>
+                    <option>MT</option>
+                    <option>MS</option>
+                    <option>RN</option>
+                    <option>AP</option>
+                    <option>PR</option>
+                    <option>RJ</option>
+                    <option>ES</option>
+                </select>
+                <label for="floatingSelect">Estado</label>
+            </div>
+            <div class="form-floating mb-3 mt-3 w-50">
+                <input  
+                onchange="VerificaInput('cep')" 
+                type="number" 
+                class="form-control is-invalid" 
+                id="cep"
+                name="cep" 
+                placeholder="CEP" 
+                oninput="buscaCEP()">
+                <label for="floatingInput">Cep</label>
+            </div>
+            
+        </center>
+        <div class="form-group">
+            <div class="form-check ">
+                <input   
+                class="form-check-input " 
+                type="checkbox" 
+                id="termos"
+                onclick="Dados()">
+                <label class="form-check-label " for="floatingInput" >
+                    <span class="text-light"> Aceito as diretrizes.</span>
+                </label>
+            </div>
+        </div>
+        <button type="submit" id="submit" class="btn btn-primary w-100 mb-2 " disabled>Enviar</button>
+    </form>
+</main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<script>
+    $('#cep').mask('00000000');
+    $('#telefone').mask('(00)00000-0000');
+</script>
+
+<script>
+    function buscaCEP() {
+        let campoCEP = document.getElementById("cep");
+        let cep = campoCEP.value;
+        let cep_clean = cep.replace(/\D/gm, "");
+
+        if (cep_clean.length >= 8) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                const objeto = JSON.parse(this.responseText);
+
+             console.log(   Estado(objeto.uf));
+                Cidade(objeto.localidade);
+
+           console.log(     Endereco(objeto.bairro, objeto.logradouro));
+            };
+            xhttp.open("GET", `https://viacep.com.br/ws/${cep_clean}/json/`);
+            xhttp.send();
+        } else limpaTudo();
+    }
+
+    function Estado(estado) {
+        let campo_estado = document.getElementById("estado");
+        campo_estado.value = estado;
+        return estado;
+    }
+    function Cidade(cidade) {
+        let campo_cidade = document.getElementById("cidade");
+        if (cidade == undefined) campo_cidade.value = "";
+        else campo_cidade.value = cidade;
+    }
+    function Endereco(bairro, rua) {
+        let campo_endereco = document.getElementById("endereco");
+        if (bairro == undefined && rua == undefined) campo_endereco.value = "";
+        else campo_endereco.value = bairro + "," + rua;
+        return bairro + rua;
+    }
+
+    function limpaTudo() {
+        document.getElementById("cidade").value = "";
+        document.getElementById("estado").value = "";
+        document.getElementById("endereco").value = "";
+    }
+    
+    const Dados = () => {
+    let campos = document.querySelectorAll('input, select, textarea');
+    let arquivo = document.getElementById("foto");
+    let termos = document.getElementById("termos");
+    let todosPreenchidos = true;
+
+    campos.forEach(function(campo) {
+        if (campo.value.trim() === '') {
+            todosPreenchidos = false;
+        }
+    });
+
+    if (!termos.checked || arquivo.value === '') {
+        todosPreenchidos = false;
+    }
+
+    let submit = document.getElementById("submit");
+    submit.disabled = !todosPreenchidos;
+}
+
+ 
+        const VerificaInput = (dado) =>{
+
+        Dados();
+    console.log("Verificando input:", dado);
+       
+    let verifica = document.getElementById(dado);
+    
+    if(verifica.value.length > 0){
+        verifica.classList.remove("is-invalid");
+        verifica.classList.add("is-valid");
+    }
+           
+        
+     else{
+        verifica.classList.remove("is-valid");
+        verifica.classList.add("is-invalid"); 
+     }
+
+     
+    }
+ 
+
+    
+</script>
+</body>
+</html>

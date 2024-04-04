@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="h-100">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Produtos</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+    />
+    
+    <style>
+        body {
+            border: 5px solid blueviolet; 
+        } 
+
+        #main {
+            color: white;
+        }
+        #form {
+            color: black;
+        }
+       
+        /* Aparência que terá o seletor de arquivo */
+        #foto {
+            background-color: #3498db;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+            padding: 6px 20px;
+        }
+        
+       
+        .picture {
+            width: 200px;
+            aspect-ratio: 16/9;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            border: 2px dashed currentcolor;
+            cursor: pointer;
+            font-family: sans-serif;
+            transition: color 300ms ease-in-out, background 300ms ease-in-out;
+            outline: none;
+            overflow: hidden;
+        }
+
+        .picture:hover {
+            color: #777;
+            background: #ccc;
+        }
+
+        .picture:active {
+            border-color: turquoise;
+            color: turquoise;
+            background: #eee;
+        }
+
+        .picture:focus {
+            color: #777;
+            background: #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .picture__img {
+            max-width: 100%;
+        }
+        #titulo{
+          margin-bottom: 10vh;  
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center py-4 bg-dark h-100">
+    <main id="main" class="m-auto container">
+        <h1 id="titulo"><span style="color:blueviolet" class="">Fw </span>variedades</h1>
+        <center>
+            <form class="form-container needs-validation bg bg-dark.bg-gradient mb-5" id="form" action="./Model/products.php?option=1" method="POST" novalidate enctype="multipart/form-data">
+                <center><h1 class="h3 mb-5 fw-normal text-light fs-1"> Cadastro de Produtos</h1></center>
+                <div class="form-row">
+                    <div class="form-floating ">
+                        <select
+                            oninput="VerificaInput('produto')"
+                            class="form-select mb-3 w-75 text-center"
+                            id="produto"
+                            name="produto"
+                            aria-label="Floating label select example">
+                            <option selected disabled value="">Produto</option>
+                            <option value="camisetas">Camisetas</option>
+                            <option value="tenis">Tênis</option>
+                            <option value="esportivos">Esportivos</option>
+                            <option value="infantis">Infantis</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input 
+                            onchange="VerificaInput('modelo')"
+                            type="text" 
+                            class="form-control is-invalid" 
+                            id="modelo" 
+                            name="modelo" 
+                            placeholder="Modelo"
+                            required>
+                        <label for="floatingInput">Modelo</label>
+                    </div>
+                    <div class="form-floating mb-3 w-75">
+                        <input 
+                            onchange="VerificaInput('quantidade')"
+                            type="text" 
+                            class="form-control is-invalid " 
+                            id="quantidade" 
+                            name="quantidade" 
+                            placeholder="Quantidade"
+                            required>
+                        <label for="floatingInput">Quantidade</label>
+                    </div>
+                </div>
+                
+                <div class="form-floating mb-3 w-75">
+                  <input 
+                      onchange="VerificaInput('valor')"
+                      type="text" 
+                      class="form-control is-invalid " 
+                      id="valor" 
+                      name="valor" 
+                      placeholder="Valor"
+                      required>
+                  <label for="floatingInput">Valor</label>
+              </div>
+
+        
+        <div class="mb-3">
+            <label class="picture" for="foto" tabIndex="0">
+                <span class="picture__image text-dark"></span>
+              </label>
+              
+              <input 
+                onchange="Dados()"
+                type="file" 
+                class="form-control"
+                name="foto" 
+                id="foto"
+                hidden
+                required>
+                </div>
+           
+        <button type="submit" id="submit" class="btn btn-primary w-50 mb-2 " disabled>Enviar</button>
+    </center>    
+    </form>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<script>
+    $('#valor').mask("#.##0,00", {reverse: true});
+    $('#quantidade').mask('00000000');
+</script>
+
+<script>
+    
+    
+    const Dados = () => {
+    let campos = document.querySelectorAll('input, select, textarea');
+    let arquivo = document.getElementById('foto');
+    let todosPreenchidos = true;
+
+    campos.forEach(function(campo) {
+        if (campo.value.trim() === '') {
+            todosPreenchidos = false;
+        }
+    });
+
+    if (  arquivo.value === '') {
+        todosPreenchidos = false;
+    }
+
+    let submit = document.getElementById("submit");
+    submit.disabled = !todosPreenchidos;
+}
+
+ 
+        const VerificaInput = (dado) =>{
+
+        Dados();
+    console.log("Verificando input:", dado);
+       
+    let verifica = document.getElementById(dado);
+    
+    if(verifica.value.length > 0){
+        verifica.classList.remove("is-invalid");
+        verifica.classList.add("is-valid");
+    }
+           
+        
+     else{
+        verifica.classList.remove("is-valid");
+        verifica.classList.add("is-invalid"); 
+     }
+
+     
+    }
+ 
+    const inputFile = document.querySelector("#foto");
+const pictureImage = document.querySelector(".picture__image");
+const pictureImageTxt = "Foto do produto";
+pictureImage.innerHTML = pictureImageTxt;
+
+inputFile.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
+
+      const img = document.createElement("img");
+      img.src = readerTarget.result;
+      img.classList.add("picture__img");
+
+      pictureImage.innerHTML = "";
+      pictureImage.appendChild(img);
+    });
+
+    reader.readAsDataURL(file);
+  } else {
+    pictureImage.innerHTML = pictureImageTxt;
+  }
+});
+
+    
+</script>
+</body>
+</html>

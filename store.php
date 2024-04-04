@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE HTML>
 
@@ -8,6 +9,8 @@ session_start();
 			<title>Página inicial</title>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="./css/struct.css" />
 			<link rel="stylesheet" href="style/css/main.css" />
 			<link rel="stylesheet" type="text/css" href="style/css/Page.css"/>
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -39,11 +42,61 @@ session_start();
     padding: 0; /* Para garantir que não haja preenchimento interno dentro da borda */
 }
 
+		
+#title-products{
+	margin-top: 100vh;
+
+}		
+
 
 </style>
 
 
+<?php
 
+require_once("./Controller/Select.php");
+include("./Controller/Connection.php");
+
+$item = $_GET['estoque'];
+$url = $_GET['filtro'];
+
+
+
+if($url == 1){
+$dados = $_SESSION['itens'];
+$selection = "Todas";
+$secundary = "<li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=2'>Abaixo de R$100,00</a></li>
+			  <li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=3'>Acima de R$100,00</a></li>";
+
+}
+
+if($url == 2){
+$filtragem = new Select();
+$selection = "Abaixo de 100";
+$secundary = "<li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=3'>Acima de R$100,00</a></li>
+			   <li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=1'>Todas</a></li>";
+
+$dados = $filtragem->Filtro($item,$conexao,2);
+
+}
+if($url == 3){
+	$filtragem = new Select();
+	$selection = "Acima de 100";
+	$secundary = "<li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=2'>Abaixo de R$100,00</a></li>
+				  <li><a class='dropdown-item' href='store.php?estoque=".$item."&filtro=1'>Todas</a></li>";
+
+	
+	$dados = $filtragem->Filtro($item,$conexao,3);
+	}
+
+
+
+	
+
+
+	
+
+?>
 			
 			
 		<body id="body"  class="is-preload Page" >
@@ -95,34 +148,29 @@ session_start();
 	</div>
     </div>
   </div>
+  <center>
+	  <h1 >  SITE DE VENDAS   <br></h1>
+	  <button class="btn btn-dark">Adicionar ao carrinho</button>
+  </center>
 </div>
 
 	
 </div>
 </div>
 
-<div class="inner center-custom">
-	<img id="foto" src="" alt="">
 	
 	<!-- Header -->
-	<center>
-		<h1 >  SITE DE VENDAS   <br></h1>
-		<button class="btn btn-dark">Adicionar ao carrinho</button>
-	</center>
 	<header id="header">
 		
-			<!--<a href="index.html" class="logo"><strong>Portfólio</strong> de Anderson Ferreira</a>-->
 			    <nav class="navbar navbar-light ">
                     <div class="container" >
-                        <div class="dropdown">
-                            <i class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Filtrar
+                        <div class="dropdown ">
+                            <i class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $selection;  ?>
                             </i>
                         
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="#">Todas</a></li>
-                              <li><a class="dropdown-item" href="#">Abaixo de R$100,00</a></li>
-                              <li><a class="dropdown-item" href="#">Acima de R$100,00</a></li>
+							<ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+							<?php echo $secundary; ?>
                             </ul>
                         
                           </div> 
@@ -136,7 +184,21 @@ session_start();
 		<section id="banner">
 			<div class="content">
 				<header>
-			<center>	<u>	<h1>Sessão de camisetas</h1> </center></u>
+			<center>	
+					<h1 id="title-products" class="display-3 bg bg-warning border border-danger text-dark w-100">
+				 <?php if ($item === "tenis") {
+			echo "Tênis";
+					} elseif ($item === "camisetas") {
+			echo"Camisetas";
+					} elseif ($item === "infantis") {
+			echo"Infantis";
+					} elseif ($item === "esportivos") {
+			echo"Esportivos";
+}
+?>
+				
+				</h1> 
+			</center>
 					
 				</header>
 				
@@ -146,32 +208,33 @@ session_start();
 
 	<!-- Section -->
 	<main>
-		<div class="container">
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
+		<div class="container ">
+    <section class="py-5 mt-5">
+        <div class="container">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 		<?php
 		
 
 		
-		foreach($_SESSION['itens'] as $produto){
+		foreach($dados as $produto){
 		echo "	
+		<script>". $produto['imagem'] . "</script>
 		  <div class='col mb-5'>
-                        <div class='card h-100'>
+                        <div class='card h-100 w-100'>
                             <!-- Product image-->
-                            <img class='card-img-top border border-dark' src='". $produto['imagem'] . "' alt='...' />
+                            <img class='card-img-top border border-dark ' src='". $produto['imagem'] . "' alt='...' />
                             <!-- Product details-->
-                            <div class='card-body p-4'>
+                            <div class='card-body p-4 w-100'>
                                 <div class='text-center'>
                                     <!-- Product name-->
-                                    <h5 class='fw-bolder border border-dark'>". $produto['modelo'] . "</h5>
+                                    <h5 class='fw-bolder border '>". $produto['modelo'] . "</h5>
                                     <!-- Product price-->
 
-                                    <h5 class'font-weight-bold'>Quantidade no estoque:<br><br> ". $produto['quantidade'] . " itens</h5>
-                                    <h5 class'font-weight-bold'>R$ ". $produto['valor'] . " reais </h5>
+                                    <h5 class'font-weight-bold'>Estoque: <span id='color-cards'> ". $produto['quantidade'] . "</span> itens </h5>
+                                    <h5 class'font-weight-bold' id='buy'>R$ ". $produto['valor'] . " reais </h5>
                                 </div>
                             </div>
-                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
+                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent w-100'>
                                 <div class='text-center'><a class='btn btn-secondary mt-auto' href='#'>Ver mais</a></div>
                             </div>
                         </div>
@@ -196,7 +259,52 @@ session_start();
                                 
 					<!-- Footer -->
 						<footer id="footer">
-							
+						<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+    <img src="" alt="">  
+	<small class="d-block mb-3 text-body-secondary">© since 2024</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5></h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary text-decoration-none" href="#">Business</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Education</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
 						</footer>
 
 				</div>

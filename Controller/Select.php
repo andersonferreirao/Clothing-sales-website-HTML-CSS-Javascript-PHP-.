@@ -1,7 +1,8 @@
 <?php
 
+
 include("Connection.php");
-session_start();
+
 
 class Select{
    
@@ -16,6 +17,16 @@ class Select{
       
    }
    
+   public function getEmail_aut(){
+        return $this->email_aut;    
+        
+   }
+   public function getSenha_aut(){
+        return $this->senha_aut;
+   }
+
+
+
         public function Busca($email, $pass, $conn){               
                 
         $sql = "SELECT `id`FROM `usuarios` WHERE `email` = '$email' and `senha`= :senha";
@@ -23,22 +34,24 @@ class Select{
         $select->bindParam(':senha', $pass); 
         $select->execute();       
 
-        $_SESSION["password"];
+        $_SESSION["adm"] = false;
 
         
         try{
-        if(!$consulta = $select->fetch(PDO::FETCH_ASSOC)){ 
+        if(!$consulta = $select->fetch(PDO::FETCH_ASSOC)){
                 throw new Exception("erro ao buscar usuário");
                 $_SESSION["password"] = false;
+                return false; 
         }
                 else{
-                $_SESSION['id'] = $consulta['id'];
-                $_SESSION["password"] = true;
-                return true;
+                        $_SESSION['id'] = $consulta['id'];
+                        $_SESSION["adm"] = true;
+                        return true; 
+               
                 }
         }       
         catch(Exception $e ){
-                header("Location: index.php");
+                return false;
         }
         }
         
@@ -52,6 +65,7 @@ class Select{
 
                 if($itens){
                         $_SESSION['itens'] = $itens;
+                        $_SESSION['filtro-inicial'] = 1;
                 }
                 else{
                 throw new Exception("erro ao buscar itens");
@@ -62,6 +76,53 @@ class Select{
                        
         header("Location: Page.php");   
           exit();      
+        }
+                
+        }
+        public function Filtro($item, $conexao,$filtro){
+                if($filtro == 2){
+                try{
+                $sql = "SELECT * FROM `$item` WHERE `valor` < 100 ";
+                $conn = $conexao->prepare($sql); 
+                $conn->execute();
+                
+                $itens = $conn->fetchAll(PDO::FETCH_ASSOC);
+                
+                if($itens)
+                return $itens;
+        
+                else
+                throw new Exception("erro ao buscar itens");
+                
+        }
+        
+        catch(Exception $e){
+                
+                header("Location: Page.php");   
+                exit();      
+        }
+}
+        else if($filtro == 3){
+                try{
+                        $sql = "SELECT * FROM `$item` WHERE `valor` > 100 ";
+                        $conn = $conexao->prepare($sql); 
+                        $conn->execute();
+                        
+                        $itens = $conn->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if($itens)
+                        return $itens;
+                
+                        else
+                        throw new Exception("erro ao buscar itens");
+                        
+                }
+                
+                catch(Exception $e){
+                        
+                        header("Location: Page.php");   
+                        exit();      
+                }      
         }
                 
         }

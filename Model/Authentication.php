@@ -1,28 +1,34 @@
 <?php
-
+session_start();
 
 include("../Controller/Connection.php");
 require_once("../Controller/Select.php");
 
 
 class Authentication {
+
+  
 public static function Autenticar($email, $password,$conn){
 
 
-$email_aut = $email;
-$senha_aut = $password;
+$_SESSION['email_aut'] = $email;
+$_SESSION['senha_aut'] = $password;
 
-$verifica = new Select($email_aut,$senha_aut);
+$verifica = new Select($_SESSION['email_aut'],$_SESSION['senha_aut']);
 
 
-$verifica->Busca($verifica->getEmail_aut(),$verifica->getSenha_aut(),$conn);
+$redireciona = $verifica->Busca($verifica->getEmail_aut(),$verifica->getSenha_aut(),$conn);
+
+if($redireciona == true)
+header('Location: ../page.php');
+
+else
+header('Location: ../index.html');
 } 
 } 
 
 
-$_SESSION['email'] = $_POST['email'];
-$_SESSION['senha'] = $_POST['senha'];
 
-Authentication::Autenticar($_SESSION['email'], $_SESSION['senha'],$conexao);
-header("Location: ../Page.php");
+Authentication::Autenticar($_POST['email'], $_POST['senha'],$conexao);
+
 ?>

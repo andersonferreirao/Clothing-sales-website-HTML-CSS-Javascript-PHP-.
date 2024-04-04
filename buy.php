@@ -128,15 +128,24 @@ session_start();
 
 	<!-- Section -->
 	<main>
-		<div class="container float-sm-start">
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-		
-		
-		
-		</div>
-        </div>
+	<section class="container">
+	<div class="position-relative">
+  <div class="position-absolute top-0 start-0">
+	<img src="https://m.media-amazon.com/images/I/51EuwNtDg5L._AC_SX522_.jpg" alt="">
+	
+	
+  </div>
+  
+  	
+	
+  </div>
+  
+  <div class="position-absolute top-0 end-0">d</div>
+  <div class="position-absolute top-50 start-50">d</div>
+  <div class="position-absolute bottom-50 end-50">d</div>
+  
+  
+</div>
     </section>
 </div>
 

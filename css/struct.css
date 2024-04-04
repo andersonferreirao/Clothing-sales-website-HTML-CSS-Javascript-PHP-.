@@ -1,50 +1,57 @@
-
-.img{
-    position: relative;
-    background-color: #343a40;
-    background: url("https://opopular.com.br/image/policy:1.2062806:1678076521/image.jpg") no-repeat center center;
-    background-size: cover;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-  }
-
-
-
-
-
-  .cor {
-    background-color: white !important;
-}
-.background{
-
-  background-color:#2E165B;
-  height: 100vh;
-  width: 100vh; 
+body {
+  border: 10px solid blueviolet ;
   
-}
-
-
+} 
 
 .form-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 50vh;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
- 
+ max-width: 300px;
+ padding: 1rem;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
 }
+h1,h5{
 
-.form-container form {
-  margin: 0;
-}
-.link{
-
- position: absolute;
- right: 7%; 
+color: white;
 
 }
+form,label{
+    color: black;
+}
+progress{
+    width: 100%;
+}
+#nav{
+    margin-bottom: 95;
+}
+::-webkit-progress-bar {
+    background-color: green;
+  }
 
+  #color-cards{
+    color: rgba(255, 0, 0, 0.625);
+  }
+  #buy{
+    font-style: italic;
+  }
+  .navbar-custom {
+    background-color: blueviolet; /* Cor de fundo */
+    position: absolute; /* Fixa a barra de navegação no topo */
+    width: 100%; /* Define a largura da barra de navegação como 100% da largura da tela */
+    top: 0; /* Posiciona a barra de navegação no topo da página */
+    left: 1; /* Alinha a barra de navegação com a borda esquerda da tela */
+    z-index: 1000; /* Define a ordem de empilhamento para garantir que a barra de navegação fique sobre o conteúdo */
+  }
+  #nav-span{
+    background-color: black;
+    margin-left: 20px
+  }
+
+  #email{
+    width: 10vh;
+  }
+  input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}

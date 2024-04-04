@@ -1,5 +1,5 @@
 window.onload = function Page() {
-    let usuario = document.getElementById("usuario");
+    let usuario = document.getElementById("nome");
     let email = document.getElementById("email");
     let imagem = document.getElementById("imagem");
     let endereco = document.getElementById("endereco");
