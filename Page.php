@@ -10,7 +10,6 @@
 
 
 
-
 	?>
 	<!DOCTYPE HTML>
 
@@ -81,7 +80,7 @@ ody {
 
 			<!-- Header -->
 				<center>
-					 <h1 > <strong class="logo" id="user"> SITE DE VENDAS  </strong> <br></h1>
+					 <h1 > <strong class="logo" id="user"><span style="color: purple">FW </span>VARIEDADES  </strong> <br></h1>
 					 </center>
 					 <header id="header">
 					 
@@ -276,12 +275,12 @@ ody {
 							<header class="major">
 								<h2>FW</h2>
 							</header>
-							<p>site em produção.</p>
+							<p>Site em produção.</p>
 							<ul class="contact">
-								<li class="icon solid fa-envelope"><a href="#">Barretos - sp</a></li>
-								<li class="icon solid fa-phone">(17)1798197-9774</li>
-								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-								Nashville, TN 00000-0000</li>
+								<li class="icon solid fa-envelope"><a href="#">example@example.com</a></li>
+								<li class="icon solid fa-phone">(17)xxxxx-xxxx</li>
+								<li class="icon solid fa-home">1234 Barretos<br />
+								SP</li>
 							</ul>
 						</section>
 

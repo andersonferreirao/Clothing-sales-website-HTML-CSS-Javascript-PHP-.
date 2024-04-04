@@ -18,7 +18,7 @@ $cep = $dados['cep'];
 
         
 
-$dir = "../fotos/users" . $file['name'];
+$dir = "../fotos/users/" . $file['name'];
     if (move_uploaded_file($file['tmp_name'], $dir)){
         echo" 
            <script> 

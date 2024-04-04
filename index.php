@@ -1,3 +1,12 @@
+<?php   
+session_start();
+
+$alert = $alert = isset($_SESSION['alert']) ? $_SESSION['alert'] : "";
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
@@ -40,6 +49,11 @@
           </li>
         </ul>
       </div>
+    
+      <?php echo $alert; 
+      session_destroy();
+      ?>
+
     </div>
      
     
@@ -53,6 +67,8 @@
   <main id="main" class="flex-grow-1 d-flex align-items-center py-4 bg-dark">
     
   <div class="container">
+      
+
       <form novalidate class="form-container needs-validation w-100 bg bg-dark.bg-gradient mb-5" id="form" action="./Model/authentication.php" method="POST">
         <center><h1 class="h3 mb-3 fw-normal">Login</h1></center>
         <div class="form-floating mb-1">
@@ -68,6 +84,7 @@
           <label class="form-check-label text-light" for="flexCheckDefault">Lembre minha senha</label>
         </div>
         <button type="submit" class="btn btn-primary w-100 py-2">Entrar</button>
+        <center><a  class="btn btn-success w-75 mt-4" href="cadastro.html">Cadastrar</a></center>
       </form>
     </div>
   </main>

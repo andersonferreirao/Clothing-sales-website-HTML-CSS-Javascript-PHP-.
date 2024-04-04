@@ -112,7 +112,7 @@ if($url == 3){
 	<span style="padding: 3px" ><i class="bi bi-brightness-high btn btn-outline-warning" onclick="darkMode()"></i></span>
 
 	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	<button class="btn btn-outline-success" type="submit">Search</button>
+	<button class="btn btn-outline-success" type="submit">Buscar</button>
   </form>
 </div>
 </nav>

@@ -19,14 +19,20 @@ $verifica = new Select($_SESSION['email_aut'],$_SESSION['senha_aut']);
 
 $redireciona = $verifica->Busca($verifica->getEmail_aut(),$verifica->getSenha_aut(),$conn);
 
-if($redireciona == true)
+
+if($redireciona == true){
 header('Location: ../page.php');
+$_SESSION['alert'] = "";
+}
+else{
+header('Location: ../index.php');
+$_SESSION['alert'] = "<div class='alert alert-danger' role='alert'>
+                    Senha ou email incorretos!!
+                    </div>";
 
-else
-header('Location: ../index.html');
 } 
 } 
-
+}
 
 
 Authentication::Autenticar($_POST['email'], $_POST['senha'],$conexao);
